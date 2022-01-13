@@ -19,9 +19,15 @@ function App() {
   return (
     <StyledDiv>
       <Form></Form>
-      <Tasks></Tasks>
-      <Tasks></Tasks>
-      <Tasks></Tasks>
+      <div style={{marginTop: -20, zIndex: 1}}>
+        <input type="checkbox"></input>
+        <label></label>
+        <ul style={{paddingInlineStart: 0}}>
+          <Tasks></Tasks>
+          <Tasks></Tasks>
+          <Tasks></Tasks>
+        </ul>
+      </div>
       <Filter></Filter>
     </StyledDiv>
   );

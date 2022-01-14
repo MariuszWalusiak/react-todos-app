@@ -7,8 +7,7 @@ export const TaskList = () => {
       <ListToggle />
       <ul style={{ paddingInlineStart: 0, marginTop: -20 }}>
         <Tasks />
-        <Tasks />
-        <Tasks />
+        
       </ul>
     </div>
   );

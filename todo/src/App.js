@@ -1,8 +1,8 @@
-import { Form } from "./compontents/Form";
+import { Header } from "./compontents/Header";
 import { Filter } from "./compontents/Filter";
 import { Tasks } from "./compontents/Tasks";
 import styled from "styled-components";
-
+import { TaskList } from "./compontents/TaskList";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -18,16 +18,8 @@ const StyledDiv = styled.div`
 function App() {
   return (
     <StyledDiv>
-      <Form></Form>
-      <div style={{marginTop: -20, zIndex: 1}}>
-        <input type="checkbox"></input>
-        <label></label>
-        <ul style={{paddingInlineStart: 0}}>
-          <Tasks></Tasks>
-          <Tasks></Tasks>
-          <Tasks></Tasks>
-        </ul>
-      </div>
+      <Header></Header>
+      <TaskList/>
       <Filter></Filter>
     </StyledDiv>
   );

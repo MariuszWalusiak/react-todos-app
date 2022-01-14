@@ -3,24 +3,22 @@ import { useState } from "react";
 import styles from "./styles/Tasks.module.css";
 
 export const Tasks = () => {
-  const [checked, setChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   return (
     <li className={styles.li}>
       <div className={styles.container}>
-        <input
-          type="checkbox"
-          checked={checked}
-          onChange={() => console.log("this is change!")}
-        ></input>
-        <label
-          onClick={() => setChecked((was) => !was)}
+        <input type="checkbox" defaultChecked={isChecked}></input>
+        <label className={isChecked ? styles.labelOn : styles.labelOff}
+          onClick={() => setIsChecked((was) => !was)}
           htmlFor="checkbox"
         ></label>
       </div>
-      <span className={styles.label}>Label</span>
+      <span className={isChecked ? styles.contentOff : styles.contentOn}>
+        Label
+      </span>
 
-      <button className={styles.button}>x</button>
+      <button className={styles.button}>+</button>
     </li>
   );
 };

@@ -1,12 +1,20 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./styles/Tasks.module.css";
-
 
 const TASK_LIST = ["read", "sleep", "eat", "drink alcohol", "dont take drugs"];
 
 export const Task = (props) => {
   const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    if (props.allChecked) {
+      setIsChecked(true);
+    } else {
+      setIsChecked(false);
+    }
+  }, [props.allChecked]);
+
   return (
     <li className={styles.li}>
       <div className={styles.container}>
@@ -28,6 +36,3 @@ export const Task = (props) => {
     </li>
   );
 };
-
-
-

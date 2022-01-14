@@ -1,6 +1,6 @@
 import { Header } from "./compontents/Header";
 import { Filter } from "./compontents/Filter";
-import { Task } from "./compontents/Tasks";
+import { Task } from "./compontents/Task";
 import styled from "styled-components";
 import { TaskList } from "./compontents/TaskList";
 import { useState, useRef } from "react";
@@ -17,10 +17,9 @@ const StyledDiv = styled.div`
 
 function App() {
   const [task, setTask] = useState("");
-  const [taskList, setTaskList]  = useState([])
+  const [taskList, setTaskList]  = useState([]);
   
   const taskRef = useRef();
-
   
   const handleSubmit = (event) => {
     event.preventDefault();

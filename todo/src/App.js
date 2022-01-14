@@ -1,6 +1,6 @@
 import { Header } from "./compontents/Header";
 import { Filter } from "./compontents/Filter";
-import { Tasks } from "./compontents/Tasks";
+import { Task } from "./compontents/Tasks";
 import styled from "styled-components";
 import { TaskList } from "./compontents/TaskList";
 import { useState, useRef } from "react";
@@ -17,12 +17,24 @@ const StyledDiv = styled.div`
 
 function App() {
   const [task, setTask] = useState("");
+  const [taskList, setTaskList]  = useState([])
+  
   const taskRef = useRef();
+
+  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(taskRef.current.value);
+    let newTask = [...taskList, taskRef.current.value];
+    setTaskList(newTask)
+    setTask("");
+    console.log(taskList)
+  };
 
   return (
     <StyledDiv>
-      <Header task={task} onTaskChange={setTask} taskRef={taskRef}></Header>
-      <TaskList />
+      <Header task={task} onTaskChange={setTask} taskRef={taskRef} onSubmit={handleSubmit}></Header>
+      <TaskList taskList={taskList}/>
       <Filter></Filter>
     </StyledDiv>
   );

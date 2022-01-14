@@ -2,15 +2,12 @@ import React from "react";
 import styles from "./styles/Form.module.css";
 import { useState, useRef } from "react";
 
-export const Header = ({ task, onTaskChange, taskRef }) => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(taskRef.current.value);
-    onTaskChange("");
-  };
+export const Header = ({ onSubmit, task, onTaskChange, taskRef,  }) => {
+
+  
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
         <label htmlFor="add-task">
           <h1 className={styles.header}>todos</h1>
           <input

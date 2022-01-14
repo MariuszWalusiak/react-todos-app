@@ -1,11 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import styles from "./styles/Tasks.module.css";
-import { nanoid } from "nanoid";
+
 
 const TASK_LIST = ["read", "sleep", "eat", "drink alcohol", "dont take drugs"];
 
-const Task = (props) => {
+export const Task = (props) => {
   const [isChecked, setIsChecked] = useState(false);
   return (
     <li className={styles.li}>
@@ -29,8 +29,5 @@ const Task = (props) => {
   );
 };
 
-export const Tasks = () => {
-  return TASK_LIST.map((task) => {
-    return <Task key={nanoid()} id={nanoid()} name={task} />;
-  });
-};
+
+

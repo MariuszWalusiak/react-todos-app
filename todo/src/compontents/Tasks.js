@@ -8,7 +8,7 @@ const TASK_LIST = ["read", "sleep", "eat", "drink alcohol", "dont take drugs"];
 const Task = (props) => {
   const [isChecked, setIsChecked] = useState(false);
   return (
-    <li className={styles.li} key={props.key}>
+    <li className={styles.li}>
       <div className={styles.container}>
         <input
           type="checkbox"

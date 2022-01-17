@@ -15,9 +15,11 @@ export const TaskList = ({ taskList }) => {
           <Task
             key={nanoid()}
             id={nanoid()}
-            name={task}
+            name={task.name}
             allChecked={allChecked}
             setAllChecked={setAllChecked}
+            checked={task.checked}
+            setChecked={task.handleChange}
           />
         ))}
       </ul>

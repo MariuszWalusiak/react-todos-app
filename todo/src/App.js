@@ -4,6 +4,7 @@ import { Task } from "./compontents/Task";
 import styled from "styled-components";
 import { TaskList } from "./compontents/TaskList";
 import { useState, useRef } from "react";
+import { nanoid } from "nanoid";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -17,23 +18,39 @@ const StyledDiv = styled.div`
 
 function App() {
   const [task, setTask] = useState("");
-  const [taskList, setTaskList]  = useState([]);
-  
+  const [taskList, setTaskList] = useState([]);
+  const [checked, setChecked] = useState(false);
+
   const taskRef = useRef();
-  
+
+  const handleChange = () => {
+    setChecked((was) => !was)
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(taskRef.current.value);
-    let newTask = [...taskList, taskRef.current.value];
-    setTaskList(newTask)
+    let newTask = {
+      name: taskRef.current.value,
+      id: nanoid(),
+      checked: checked,
+      handleChange: handleChange,
+    };
+    let newTasks = [...taskList, newTask];
+    setTaskList(newTasks);
     setTask("");
-    console.log(taskList)
+    console.log(taskList);
   };
 
   return (
     <StyledDiv>
-      <Header task={task} onTaskChange={setTask} taskRef={taskRef} onSubmit={handleSubmit}></Header>
-      <TaskList taskList={taskList}/>
+      <Header
+        task={task}
+        onTaskChange={setTask}
+        taskRef={taskRef}
+        onSubmit={handleSubmit}
+      ></Header>
+      <TaskList taskList={taskList} />
       <Filter></Filter>
     </StyledDiv>
   );

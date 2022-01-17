@@ -1,12 +1,11 @@
-
 import styles from "./styles/ListToggle.module.css";
-
-
+import { Task } from "./Task";
+import { TaskList } from "./TaskList";
 export const ListToggle = ({ allChecked, setAllChecked }) => {
-
-  // const handleClick = () {
-        
-  // }  
+  const handleClick = () => {
+    setAllChecked((was) => !was);
+    console.log(allChecked);
+  };
 
   return (
     <div className={styles.container} style={{ zIndex: 1 }}>
@@ -14,7 +13,7 @@ export const ListToggle = ({ allChecked, setAllChecked }) => {
         type="checkbox"
         id="all-checked"
         checked={allChecked}
-        onChange={() => setAllChecked((was) => !was)}
+        onChange={handleClick}
       ></input>
       <label htmlFor="all-checked"></label>
     </div>

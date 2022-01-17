@@ -4,16 +4,16 @@ import styles from "./styles/Tasks.module.css";
 
 const TASK_LIST = ["read", "sleep", "eat", "drink alcohol", "dont take drugs"];
 
-export const Task = (props) => {
+export const Task = ({ setChecked, checked, ...props }) => {
   const [isChecked, setIsChecked] = useState(false);
+   
+  // props.checked
 
-  useEffect(() => {
-    if (props.allChecked) {
-      setIsChecked(true);
-    } else {
-      setIsChecked(false);
-    }
-  }, [props.allChecked]);
+  // useEffect(() => {
+  //   props.setChecked(true);
+  // }, [props.allChecked]);
+
+  // if ()
 
   return (
     <li className={styles.li}>

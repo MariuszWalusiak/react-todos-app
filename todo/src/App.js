@@ -28,6 +28,7 @@ function App() {
       let newTask = {
         name: taskRef.current.value,
         id: nanoid(),
+        isDone: false,
       };
       let newTasks = [...taskList, newTask];
       setTaskList(newTasks);

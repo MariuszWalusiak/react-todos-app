@@ -31,7 +31,7 @@ export const Task = (props) => {
         <div className={styles.container}>
           <input
             type="checkbox"
-            checked={isChecked}
+            checked={props.taskIsDone}
             id={props.id}
             onChange={() => setIsChecked((was) => !was)}
           ></input>

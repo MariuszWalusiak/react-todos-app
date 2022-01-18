@@ -28,6 +28,7 @@ export const TaskList = ({ taskList,setTaskList }) => {
             allChecked={allChecked}
             setAllChecked={setAllChecked}
             onHandleDelete = {handleDelete}
+            taskIsDone = {task.isDone}
           />
         ))}
       </ul>

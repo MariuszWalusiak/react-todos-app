@@ -4,8 +4,17 @@ import { nanoid } from "nanoid";
 import { useState } from "react";
 import { useEffect } from "react";
 
-export const TaskList = ({ taskList }) => {
+export const TaskList = ({ taskList,setTaskList }) => {
   const [allChecked, setAllChecked] = useState(false);
+
+  const handleDelete = (id) => {
+    console.log(id)
+    const remainingTasks = taskList.filter(task => id !== task.id);
+
+    setTaskList(remainingTasks)
+    
+  }
+  
 
   return (
     <div style={{ width: 550 }}>
@@ -13,11 +22,12 @@ export const TaskList = ({ taskList }) => {
       <ul style={{ paddingInlineStart: 0, marginTop: -20 }}>
         {taskList.map((task) => (
           <Task
-            key={nanoid()}
-            id={nanoid()}
-            name={task}
+            key={task.id}
+            id={task.id}
+            name={task.name}
             allChecked={allChecked}
             setAllChecked={setAllChecked}
+            onHandleDelete = {handleDelete}
           />
         ))}
       </ul>

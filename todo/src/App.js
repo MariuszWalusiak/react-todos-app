@@ -4,6 +4,7 @@ import { Task } from "./compontents/Task";
 import styled from "styled-components";
 import { TaskList } from "./compontents/TaskList";
 import { useState, useRef } from "react";
+import { nanoid } from "nanoid";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -21,19 +22,23 @@ function App() {
   
   const taskRef = useRef();
   
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(taskRef.current.value);
-    let newTask = [...taskList, taskRef.current.value];
-    setTaskList(newTask)
-    setTask("");
-    console.log(taskList)
-  };
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      console.log(taskRef.current.value);
+      let newTask = {
+        name: taskRef.current.value,
+        id: nanoid(),
+      };
+      let newTasks = [...taskList, newTask];
+      setTaskList(newTasks);
+      setTask("");
+      console.log(taskList);
+    };
 
   return (
     <StyledDiv>
-      <Header task={task} onTaskChange={setTask} taskRef={taskRef} onSubmit={handleSubmit}></Header>
-      <TaskList taskList={taskList}/>
+      <Header task={task} onTaskChange={setTask} taskRef={taskRef} onSubmit={handleSubmit} ></Header>
+      <TaskList taskList={taskList} setTaskList={setTaskList}/>
       <Filter></Filter>
     </StyledDiv>
   );

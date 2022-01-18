@@ -20,7 +20,17 @@
   padding: 10px;
   margin-bottom: 20px;
   transform: rotate(45deg);
+  opacity: 0;
 }
+
+.li:hover .button {
+  opacity: 0.5;
+}
+
+.li .button:hover {
+  opacity: 1;
+}
+
 
 .contentOn {
   flex: 1;

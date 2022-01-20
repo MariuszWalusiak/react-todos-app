@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 export const TaskList = ({ taskList, setTaskList }) => {
+  
   const handleDelete = (id) => {
     console.log(id);
     const remainingTasks = taskList.filter((task) => id !== task.id);
@@ -22,6 +23,9 @@ export const TaskList = ({ taskList, setTaskList }) => {
     setTaskList(updatedTasks);
     console.log(id);
   };
+
+  
+
 
   return (
     <div style={{ width: 550 }}>

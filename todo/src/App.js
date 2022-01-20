@@ -18,29 +18,57 @@ const StyledDiv = styled.div`
 
 function App() {
   const [task, setTask] = useState("");
-  const [taskList, setTaskList]  = useState([]);
-  
+  const [taskList, setTaskList] = useState([]);
+  // const [filteredTaskList, setFilteredTaskList] = useState(taskList);
+
   const taskRef = useRef();
-  
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      console.log(taskRef.current.value);
-      let newTask = {
-        name: taskRef.current.value,
-        id: nanoid(),
-        isDone: false,
-      };
-      let newTasks = [...taskList, newTask];
-      setTaskList(newTasks);
-      setTask("");
-      console.log(taskList);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(taskRef.current.value);
+    let newTask = {
+      name: taskRef.current.value,
+      id: nanoid(),
+      isDone: false,
     };
-    
+    let newTasks = [...taskList, newTask];
+    setTaskList(newTasks);
+    setTask("");
+    console.log(taskList);
+  };
+
+  //TODO: filters fix!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  const handleFilter = (filter) => {
+    const previousTaskList = [...taskList];
+    let filteredTasks;
+
+    if (filter === "all") {
+      filteredTasks = previousTaskList.map((task) => task);
+    }
+    if (filter === "completed") {
+      filteredTasks = previousTaskList.filter((task) => task.isDone === true);
+    }
+    if (filter === "active") {
+      filteredTasks = previousTaskList.filter((task) => task.isDone === false);
+    }
+
+    // setTaskList(filteredTasks);
+  };
+
   return (
     <StyledDiv>
-      <Header task={task} onTaskChange={setTask} taskRef={taskRef} onSubmit={handleSubmit} ></Header>
-      <TaskList taskList={taskList} setTaskList={setTaskList}/>
-      <Filter></Filter>
+      <Header
+        task={task}
+        onTaskChange={setTask}
+        taskRef={taskRef}
+        onSubmit={handleSubmit}
+      ></Header>
+      <TaskList
+        taskList={taskList}
+        setTaskList={setTaskList}
+        handleFilter={handleFilter}
+      />
+      <Filter handleFilter={handleFilter}></Filter>
     </StyledDiv>
   );
 }

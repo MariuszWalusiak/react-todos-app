@@ -5,19 +5,10 @@ import styles from "./styles/Tasks.module.css";
 const TASK_LIST = ["read", "sleep", "eat", "drink alcohol", "dont take drugs"];
 
 export const Task = (props) => {
-  const [isChecked, setIsChecked] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState(props.name);
 
   const editInputRef = useRef();
-
-  useEffect(() => {
-    if (props.allChecked) {
-      setIsChecked(true);
-    } else {
-      setIsChecked(false);
-    }
-  }, [props.allChecked]);
 
   useEffect(() => {
     if (isEditing) {
@@ -25,18 +16,19 @@ export const Task = (props) => {
     }
   }, [isEditing]);
 
+
   return (
     <li className={styles.li}>
       {!isEditing && (
         <div className={styles.container}>
           <input
             type="checkbox"
-            checked={props.taskIsDone}
+            defaultChecked={props.taskIsDone}
             id={props.id}
-            onChange={() => setIsChecked((was) => !was)}
+            onChange={() => props.handleChange(props.id)}
           ></input>
           <label
-            className={isChecked ? styles.labelOn : styles.labelOff}
+            className={props.taskIsDone ? styles.labelOn : styles.labelOff}
             htmlFor={props.id}
           ></label>
         </div>
@@ -45,7 +37,7 @@ export const Task = (props) => {
       {!isEditing ? (
         <span
           onDoubleClick={() => setIsEditing((was) => !was)}
-          className={isChecked ? styles.contentOff : styles.contentOn}
+          className={props.taskIsDone ? styles.contentOff : styles.contentOn}
         >
           {inputValue}
         </span>

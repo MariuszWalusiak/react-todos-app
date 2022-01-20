@@ -1,20 +1,21 @@
-
 import styles from "./styles/ListToggle.module.css";
 
-
-export const ListToggle = ({ allChecked, setAllChecked }) => {
-
-  // const handleClick = () {
-        
-  // }  
+export const ListToggle = ({
+  taskList,
+  setTaskList,
+}) => {
+  const handleToggleAll = () => {
+    const allTasksDone = taskList.every((task) => task.isDone === true);
+    const newTaskList = taskList.map((task) => allTasksDone ? {...task, isDone: false} : {...task, isDone: true});
+    setTaskList(newTaskList);
+  };
 
   return (
     <div className={styles.container} style={{ zIndex: 1 }}>
       <input
         type="checkbox"
         id="all-checked"
-        checked={allChecked}
-        onChange={() => setAllChecked((was) => !was)}
+        onChange={handleToggleAll}
       ></input>
       <label htmlFor="all-checked"></label>
     </div>

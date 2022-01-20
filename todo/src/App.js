@@ -35,7 +35,7 @@ function App() {
       setTask("");
       console.log(taskList);
     };
-
+    
   return (
     <StyledDiv>
       <Header task={task} onTaskChange={setTask} taskRef={taskRef} onSubmit={handleSubmit} ></Header>

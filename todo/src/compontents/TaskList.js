@@ -2,6 +2,7 @@ import { Task } from "./Task";
 import { ListToggle } from "./ListToggle";
 
 export const TaskList = ({ taskList, setTaskList, filter }) => {
+
   const handleDelete = (id) => {
     const remainingTasks = taskList.filter((task) => id !== task.id);
     setTaskList(remainingTasks);
@@ -17,7 +18,7 @@ export const TaskList = ({ taskList, setTaskList, filter }) => {
     setTaskList(updatedTasks);
   };
 
-  function filterFunction(task) {
+  function handleFilter(task) {
     //  filter all
     if (filter === "all") {
       return true;
@@ -30,6 +31,7 @@ export const TaskList = ({ taskList, setTaskList, filter }) => {
     if (filter === "active") {
       return task.isDone === false;
     }
+    
   }
 
   return (
@@ -37,7 +39,7 @@ export const TaskList = ({ taskList, setTaskList, filter }) => {
       <ListToggle setTaskList={setTaskList} taskList={taskList} />
       <ul style={{ paddingInlineStart: 0, marginTop: -20 }}>
         {taskList
-          .filter((task) => filterFunction(task, "active"))
+          .filter((task) => handleFilter(task, "active"))
           .map((task) => (
             <Task
               key={task.id}

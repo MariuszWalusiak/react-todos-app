@@ -9,7 +9,9 @@ function App() {
   const keptData = JSON.parse(window.localStorage.getItem("todo"));
   const [task, setTask] = useState("");
   const [taskList, setTaskList] = useState(keptData || []); //keptData ? keptData : []
-  const [filter, setFilter] = useState("all");
+  const filterFromLocalStorage = window.localStorage.getItem("filter");
+
+  const [filter, setFilter] = useState(filterFromLocalStorage || "all");
 
   const taskRef = useRef();
 
@@ -30,6 +32,10 @@ function App() {
     window.localStorage.setItem("todo", JSON.stringify(taskList));
   }, [taskList]);
 
+  useEffect(() => {
+    window.localStorage.setItem("filter", filter);
+  }, [filter]);
+
   return (
     <div className={styles.main}>
       <Header
@@ -43,6 +49,7 @@ function App() {
         taskList={taskList}
         setTaskList={setTaskList}
         handleFilter={setFilter}
+        filter={filter}
       ></Filter>
     </div>
   );

@@ -6,9 +6,9 @@ export const ListToggle = ({
 }) => {
   const handleToggleAll = () => {
     const allTasksDone = taskList.every((task) => task.isDone === true);
-    const newTaskList = taskList.map((task) => allTasksDone ? {...task, isDone: false} : {...task, isDone: true});
+    const newTaskList = taskList.map((task) => ({...task, isDone: !allTasksDone})) 
     setTaskList(newTaskList);
-  };
+  };            
 
   return (
     <div className={styles.container} style={{ zIndex: 1 }}>

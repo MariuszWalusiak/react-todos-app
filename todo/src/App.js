@@ -19,6 +19,7 @@ const StyledDiv = styled.div`
 function App() {
   const [task, setTask] = useState("");
   const [taskList, setTaskList] = useState([]);
+  const [filter, setFilter] = useState("all");
   // const [filteredTaskList, setFilteredTaskList] = useState(taskList);
 
   const taskRef = useRef();
@@ -37,24 +38,6 @@ function App() {
     console.log(taskList);
   };
 
-  //TODO: filters fix!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  const handleFilter = (filter) => {
-    const previousTaskList = [...taskList];
-    let filteredTasks;
-
-    if (filter === "all") {
-      filteredTasks = previousTaskList.map((task) => task);
-    }
-    if (filter === "completed") {
-      filteredTasks = previousTaskList.filter((task) => task.isDone === true);
-    }
-    if (filter === "active") {
-      filteredTasks = previousTaskList.filter((task) => task.isDone === false);
-    }
-
-    // setTaskList(filteredTasks);
-  };
-
   return (
     <StyledDiv>
       <Header
@@ -64,11 +47,11 @@ function App() {
         onSubmit={handleSubmit}
       ></Header>
       <TaskList
+        filter={filter}
         taskList={taskList}
         setTaskList={setTaskList}
-        handleFilter={handleFilter}
       />
-      <Filter handleFilter={handleFilter}></Filter>
+      <Filter taskList={taskList} setTaskList={setTaskList} handleFilter={setFilter}></Filter>
     </StyledDiv>
   );
 }

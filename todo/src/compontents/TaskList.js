@@ -1,14 +1,9 @@
 import { Task } from "./Task";
 import { ListToggle } from "./ListToggle";
-import { nanoid } from "nanoid";
-import { useState } from "react";
-import { useEffect } from "react";
 
 export const TaskList = ({ taskList, setTaskList, filter }) => {
   const handleDelete = (id) => {
-    console.log(id);
     const remainingTasks = taskList.filter((task) => id !== task.id);
-
     setTaskList(remainingTasks);
   };
 
@@ -20,7 +15,6 @@ export const TaskList = ({ taskList, setTaskList, filter }) => {
       return task;
     });
     setTaskList(updatedTasks);
-    console.log(id);
   };
 
   function filterFunction(task) {
@@ -52,6 +46,8 @@ export const TaskList = ({ taskList, setTaskList, filter }) => {
               onHandleDelete={handleDelete}
               taskIsDone={task.isDone}
               handleChange={handleChange}
+              taskList={taskList}
+              setTaskList={setTaskList}
             />
           ))}
       </ul>

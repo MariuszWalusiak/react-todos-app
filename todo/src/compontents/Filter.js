@@ -18,6 +18,7 @@ export const Filter = ({ taskList, setTaskList, handleFilter }) => {
   const clearCompleted = () => {
     setTaskList(remainingTasks);
   };
+  
 
   return (
     <div className={styles.filter}>

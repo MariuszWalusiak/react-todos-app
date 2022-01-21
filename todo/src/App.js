@@ -1,58 +1,50 @@
+import { useState, useRef, useEffect } from "react";
 import { Header } from "./compontents/Header";
 import { Filter } from "./compontents/Filter";
-import { Task } from "./compontents/Task";
-import styled from "styled-components";
 import { TaskList } from "./compontents/TaskList";
-import { useState, useRef } from "react";
 import { nanoid } from "nanoid";
-
-const StyledDiv = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 100vw;
-  height: 100vh;
-  padding: 0px;
-  background-color: #f5f5f5;
-`;
+import styles from "./compontents/styles/App.module.css";
 
 function App() {
+  const keptData = JSON.parse(window.localStorage.getItem("todo"));
   const [task, setTask] = useState("");
-  const [taskList, setTaskList] = useState([]);
+  const [taskList, setTaskList] = useState(keptData || []); //keptData ? keptData : []
   const [filter, setFilter] = useState("all");
-  // const [filteredTaskList, setFilteredTaskList] = useState(taskList);
 
   const taskRef = useRef();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(taskRef.current.value);
     let newTask = {
       name: taskRef.current.value,
       id: nanoid(),
       isDone: false,
     };
     let newTasks = [...taskList, newTask];
+
     setTaskList(newTasks);
     setTask("");
-    console.log(taskList);
   };
 
+  useEffect(() => {
+    window.localStorage.setItem("todo", JSON.stringify(taskList));
+  }, [taskList]);
+
   return (
-    <StyledDiv>
+    <div className={styles.main}>
       <Header
         task={task}
         onTaskChange={setTask}
         taskRef={taskRef}
         onSubmit={handleSubmit}
       ></Header>
-      <TaskList
-        filter={filter}
+      <TaskList filter={filter} taskList={taskList} setTaskList={setTaskList} />
+      <Filter
         taskList={taskList}
         setTaskList={setTaskList}
-      />
-      <Filter taskList={taskList} setTaskList={setTaskList} handleFilter={setFilter}></Filter>
-    </StyledDiv>
+        handleFilter={setFilter}
+      ></Filter>
+    </div>
   );
 }
 

@@ -2,8 +2,6 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import styles from "./styles/Tasks.module.css";
 
-const TASK_LIST = ["read", "sleep", "eat", "drink alcohol", "dont take drugs"];
-
 export const Task = (props) => {
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState(props.name);
@@ -16,6 +14,16 @@ export const Task = (props) => {
     }
   }, [isEditing]);
 
+  const handleEditSubmit = (id) => {
+    setIsEditing(false);
+    const editedTaskList = props.taskList.map(task => {
+      if(id === task.id){
+      return {...task, name: inputValue}}
+    return task;
+    }
+    );
+    props.setTaskList(editedTaskList);
+  }
 
   return (
     <li className={styles.li}>
@@ -54,8 +62,8 @@ export const Task = (props) => {
           type="text"
           value={inputValue}
           onChange={(event) => setInputValue(event.target.value)}
-          onBlur={() => setIsEditing(false)}
-          onKeyDown={(e) => e.key === "Enter" && setIsEditing(false)}
+          onBlur={() => handleEditSubmit(props.id)}
+          onKeyDown={(e) => e.key === "Enter" && handleEditSubmit(props.id)}
           ref={editInputRef}
         ></input>
       )}

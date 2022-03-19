@@ -1,0 +1,1 @@
+React todo app based on todoMVC, created on Junior Frontend Developer Course at infoShare Academy.
